@@ -101,7 +101,7 @@ _get_root() {
       return 1
     fi
 
-    if _contains "$response" "\"name\":\"$h\"" > /dev/null; then
+    if _contains "$response" "\"name\":\"$h\"" >/dev/null; then
       _sub_domain=$(printf "%s" "$domain" | cut -d . -f 1-$p)
       _domain=$h
       return 0
@@ -124,9 +124,9 @@ _vercel_rest() {
 
   if [ "$m" != "GET" ]; then
     _secure_debug2 data "$data"
-    response="$(_post "$data" $path "" "$m")"
+    response="$(_post "$data" "$path" "" "$m")"
   else
-    response="$(_get $path)"
+    response="$(_get "$path")"
   fi
   _ret="$?"
   _code="$(grep "^HTTP" "$HTTP_HEADER" | _tail_n 1 | cut -d " " -f 2 | tr -d "\\r\\n")"
