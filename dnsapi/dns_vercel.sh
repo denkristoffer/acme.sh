@@ -24,7 +24,7 @@ dns_vercel_add() {
     return 1
   fi
 
-  _saveaccountconf VERCEL_TOKEN "$VERCEL_TOKEN"
+  _saveaccountconf_mutable VERCEL_TOKEN "$VERCEL_TOKEN"
 
   if ! _get_root "$fulldomain"; then
     _err "invalid domain"
