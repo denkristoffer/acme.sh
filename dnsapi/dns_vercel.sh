@@ -49,7 +49,6 @@ dns_vercel_add() {
 
 dns_vercel_rm() {
   fulldomain=$1
-  _debug "find mig i rm"
 
   if ! _get_root "$fulldomain"; then
     _err "invalid domain"
@@ -57,7 +56,6 @@ dns_vercel_rm() {
   fi
 
   _vercel_rest GET "v2/domains/$_domain/records"
-  _debug response "$response"
 
   count=$(printf "%s\n" "$response" | _egrep_o "\"name\":\"$_sub_domain\",[^{]*\"type\":\"TXT\"" | wc -l | tr -d " ")
 
